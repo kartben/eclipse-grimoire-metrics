@@ -1,0 +1,15 @@
+{
+  "name": "eclipse-grimoire-metrics",
+  "description": "Reformat Grimoire data and update Google spreadsheet",
+  "version": "0.1.0",
+  "dependencies": {
+    "moment": "*",
+    "edit-google-spreadsheet": "*"
+  },
+  "licenses": [
+    {
+      "name": "EPL",
+      "url": "https://www.eclipse.org/org/documents/epl-v10.html"
+    }
+  ]
+}
