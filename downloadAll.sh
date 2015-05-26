@@ -1,0 +1,1 @@
+ wget -r -l 0 -A "iot*" -R "index.html*" http://dashboard.eclipse.org/data/json

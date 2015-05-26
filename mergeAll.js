@@ -1,16 +1,18 @@
 var fs = require('fs');
 
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 res = {}
-fs.readdir('.', function (err, files) { 
-    if (!err) {
-        files.forEach(function (f) {
-            res[f] = require('./' + f)
-        });
-    } 
-    else
-        throw err; 
+var DIR = './dashboard.eclipse.org/data/json/';
+var files = fs.readdirSync(DIR);
+
+files.forEach(function (f) {
+	if(!f.endsWith('json')) return ;
+	console.log(f);
+    res[f] = require(DIR + f)
 });
 
-console.log(res)
-
 fs.writeFile('all.json', JSON.stringify(res, null, 4));
+
