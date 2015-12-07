@@ -45,18 +45,28 @@ for (var key in data) {
 			fields = MLS_FIELDS;
 		}
 
+		var startDate = moment(data[key]['date'][0],'MMM YYYY');
+		var months = moment(). /*startOf('month').subtract(1, 'day').*/ diff(startDate, 'months') + 1;
+
 		for (month = 0; month < months; month++) {
-			month_str = moment([2001, 0, 1]).add(month, 'month').endOf('month').format('YYYY-MM-DD');
+			month_str = startDate.clone().add(month, 'month').endOf('month').format('YYYY-MM-DD');
 
 			result[projectName][month_str] = result[projectName][month_str] || {}
 
 			fields.forEach(function(field) {
-				result[projectName][month_str][field] = data[key][field][month];
+
+			//	console.log(key, field, month, data[key][field][month])
+
+
+				if (typeof data[key][field][month] != 'undefined')
+					result[projectName][month_str][field] = data[key][field][month];
 			});
 
 		}
 	}
 }
+
+//console.log(result)
 
 var spreadsheetRows = [];
 
@@ -89,8 +99,8 @@ for (var p in result) {
 	}
 
 	for (var d in project) {
-		// start in 2012
-		if (parseInt(d.substring(0, 4)) < 2012)
+		// start in 2013
+		if (parseInt(d.substring(0, 4)) < 2013)
 			continue;
 
 		var date = project[d];
@@ -107,6 +117,7 @@ for (var p in result) {
 		row.push(percentage_senders_365);
 		row.push(authors_365);
 		row.push(percentage_authors_365);
+
 
 		spreadsheetRows.push(row);
 	}
